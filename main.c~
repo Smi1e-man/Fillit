@@ -1,0 +1,114 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/21 12:33:46 by yyakoven          #+#    #+#             */
+/*   Updated: 2018/11/22 11:02:48 by yyakoven         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "gnl/get_next_line.h"
+#include "gnl/libft/includes/libft.h"
+#include "fillit.h"
+#include <fcntl.h>
+#include <stdio.h>
+
+
+	//printf("block:\t\t%c\nline in block:\t%d\nline:\t%s\n\n",
+	//letter, count, line);
+void		add_elem(t_ttrmn **last, char block)
+{
+	t_ttrmn		*new;
+
+	new = (t_ttrmn *)malloc(sizeof(t_ttrmn));
+	if (new)
+	{
+		new->letter = block;
+		new->recorded = 0;
+		if (*last)
+			(*last)->next = new;
+		else
+			*last = new;
+	}
+}
+
+t_ttrmn		*find_elem(t_ttrmn **list, char block)
+{
+	t_ttrmn		*elem;
+
+	if (!*list)
+	{
+		add_elem(list, block);
+	}
+	elem = *list;
+	while (elem->next)
+	{
+		if (elem->letter == block)
+			break ;
+		elem = elem->next;
+	}
+	if (elem->letter != block)
+	{
+		add_elem(&elem, block);
+		elem = elem->next;
+	}
+	return (elem);
+}
+
+void	add_to_block(t_ttrmn *elem, char *line, int ord)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '#')
+		{
+			elem->s[elem->recorded][0] = ord;
+			elem->s[elem->recorded][1] = i;
+			elem->recorded++;
+		}
+		i++;
+	}
+}
+
+int			main(void)
+{
+	int					fd;
+	char				*line;
+	int					count;
+	static t_ttrmn		*list;
+	static t_ttrmn		*elem;
+	int					block;
+
+	line = NULL;
+	block = 0;
+	fd = open("ttrmn", O_RDONLY);
+	count = 0;
+	while (get_next_line(fd, &line))
+	{
+		elem = find_elem(&list, block + 'A');
+		if (!*line)
+			continue;
+		/*
+		* TODO: add line and coordinates to corresp node
+		*/
+		add_to_block(elem, line, count);
+		free(line);
+		count++;
+		if (count >= 4)
+		{
+			block++;
+			count = 0;
+		}
+	}
+	elem = find_elem(&list, 'A');
+	printf("%d, %d, %d, %d, %d, %d, %d, %d", elem->s[0][0], elem->s[0][1],
+			elem->s[1][0], elem->s[1][1], elem->s[2][0],
+			elem->s[2][1], elem->s[3][0], elem->s[3][1]);
+}
