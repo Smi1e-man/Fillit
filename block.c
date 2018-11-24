@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_to_block.c                                     :+:      :+:    :+:   */
+/*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 14:10:49 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/22 14:24:37 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/24 16:38:50 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int		add_to_block(t_ttrmn *elem, char *line, int linenum)
 	{
 		if (line[i] == '#')
 		{
-			elem->s[elem->squares][0] = linenum;
-			elem->s[elem->squares][1] = i;
-			elem->squares++;
+			elem->s[elem->hashes][0] = linenum;
+			elem->s[elem->hashes][1] = i;
+			elem->hashes++;
 		}
 		else if (line[i] == '.')
 			elem->dots++;

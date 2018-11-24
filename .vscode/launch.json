@@ -8,12 +8,12 @@
 			"name": "(lldb) Launch",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "/Users/yyakoven/C/fillit/a.out",
+			"program": "/Users/yyakoven/C/fillit/fillit",
 			"args": [],
 			"stopAtEntry": false,
 			"cwd": "/Users/yyakoven/C/fillit",
 			"environment": [],
-			"externalConsole": true,
+			"externalConsole": false,
 			"MIMode": "lldb"
 		}
 	]

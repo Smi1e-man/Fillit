@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:45:12 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/22 18:41:57 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/24 16:35:16 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __FILLIT_H
 # define __FILLIT_H
 
+# define LETTER 'A'
 # include "gnl/get_next_line.h"
 # include "gnl/libft/includes/libft.h"
 # include <fcntl.h>
@@ -23,7 +24,7 @@ typedef struct		s_ttrmn
 	int				s[4][2];
 	char			letter;
 	int				dots;
-	int				squares;
+	int				hashes;
 	struct s_ttrmn	*next;
 }					t_ttrmn;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 14:09:49 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/22 18:41:34 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/24 16:58:09 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		add_elem(t_ttrmn **last, char letter)
 	if (new)
 	{
 		new->letter = letter;
-		new->squares = 0;
+		new->hashes = 0;
 		new->dots = 0;
 		new->next = NULL;
 		if (*last)
@@ -55,13 +55,14 @@ t_ttrmn		*find_elem(t_ttrmn **list, char letter)
 
 void		lst_del(t_ttrmn **list)
 {
-	t_ttrmn 	*ptr;
+	t_ttrmn		*ptr;
 
 	ptr = *list;
-	while(ptr)
+	while (ptr)
 	{
 		ptr = ptr->next;
 		free(*list);
 		*list = ptr;
 	}
+	system ("leaks fillit");
 }
