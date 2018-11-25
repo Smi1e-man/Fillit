@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 12:33:46 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/24 17:01:28 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/25 12:40:17 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int			validate_block(t_ttrmn *node)
 		j = 0;
 		while (j < 4)
 		{
-			total += validate_ttrmn(node->s[i][0], node->s[j][0],
-			node->s[i][1], node->s[j][1]);
+			total += validate_ttrmn(node->coords[i][0], node->coords[j][0],
+			node->coords[i][1], node->coords[j][1]);
 			j++;
 		}
 		i++;

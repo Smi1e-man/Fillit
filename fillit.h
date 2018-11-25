@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:45:12 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/24 16:35:16 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/25 12:40:17 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct		s_ttrmn
 {
-	int				s[4][2];
+	int				coords[4][2];
 	char			letter;
 	int				dots;
 	int				hashes;

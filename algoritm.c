@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   algoritm.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 18:58:33 by seshevch          #+#    #+#             */
-/*   Updated: 2018/11/24 20:51:28 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/11/25 12:40:55 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "gnl/libft/includes/libft.h"
 #include "stdio.h"
+#include "fillit.h"
 
+/*
+** draws tetrimino if possible 
+*/
 int     ft_alpha(char **str, int i, int k, int p, int *coor)
 {
     //int     coor[9] = {0,0,0,1,1,0,2,0,42};
@@ -41,8 +45,10 @@ int     ft_alpha(char **str, int i, int k, int p, int *coor)
     }
     return (0);
 }
-
-int     ft_super_alpha(char **str, int i, int k, int a, int coor[2][9])
+/*
+** draws all tetriminos if possible
+*/
+int     ft_super_alpha(char **str, int i, int k, t_ttrmn *list)
 {
     //int     coor1[9] = {0,0,0,1,1,0,2,0,42};
     //int     i1;
@@ -51,7 +57,7 @@ int     ft_super_alpha(char **str, int i, int k, int a, int coor[2][9])
     int         t;
 
     t = 0;
-    while(!(i == 4 && k == 4) && ((t = ft_alpha(str, i , k, 0, coor[a])) == 0))
+    while(!(i == 4 && k == 4) && ((t = ft_alpha(str, i , k, 0, list->coords)) == 0))
     {
         if (str[i][k + 1] == '\0')
         {
@@ -101,6 +107,10 @@ int     ft_super_alpha(char **str, int i, int k, int a, int coor[2][9])
     return (0);
 }
 
+int 
+{
+
+}
 int     main(void)
 {
     char    **str;
