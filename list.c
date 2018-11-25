@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   lst.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@sudent.unit.ua>         +#+  +:+       +#+        */
+/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 14:09:49 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/24 16:58:09 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/25 14:17:11 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		add_elem(t_ttrmn **last, char letter)
 	if (new)
 	{
 		new->letter = letter;
-		new->hashes = 0;
+		new->h = 0;
 		new->dots = 0;
 		new->next = NULL;
 		if (*last)
@@ -30,15 +30,15 @@ void		add_elem(t_ttrmn **last, char letter)
 	}
 }
 
-t_ttrmn		*find_elem(t_ttrmn **list, char letter)
+t_ttrmn		*find_elem(t_ttrmn **lst, char letter)
 {
 	t_ttrmn		*elem;
 
-	if (!*list)
+	if (!*lst)
 	{
-		add_elem(list, letter);
+		add_elem(lst, letter);
 	}
-	elem = *list;
+	elem = *lst;
 	while (elem->next)
 	{
 		if (elem->letter == letter)
@@ -53,16 +53,16 @@ t_ttrmn		*find_elem(t_ttrmn **list, char letter)
 	return (elem);
 }
 
-void		lst_del(t_ttrmn **list)
+void		lst_del(t_ttrmn **lst)
 {
 	t_ttrmn		*ptr;
 
-	ptr = *list;
+	ptr = *lst;
 	while (ptr)
 	{
 		ptr = ptr->next;
-		free(*list);
-		*list = ptr;
+		free(*lst);
+		*lst = ptr;
 	}
-	system ("leaks fillit");
+	//system ("leaks fillit");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   block.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
+/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 14:10:49 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/25 12:40:17 by yyakoven         ###   ########.fr       */
+/*   Updated: 2018/11/25 15:03:39 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ int		add_to_block(t_ttrmn *elem, char *line, int linenum)
 	{
 		if (line[i] == '#')
 		{
-			elem->coords[elem->hashes][0] = linenum;
-			elem->coords[elem->hashes][1] = i;
-			elem->hashes++;
+			if (elem->h < 4)
+			{
+				elem->xy[elem->h][0] = linenum;
+				elem->xy[elem->h][1] = i;
+			}
+			elem->h++;
 		}
 		else if (line[i] == '.')
 			elem->dots++;

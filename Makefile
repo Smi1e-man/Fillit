@@ -1,6 +1,6 @@
 NAME = fillit
 
-SRCS = main.c block.c list.c gnl/get_next_line.c
+SRCS = main.c block.c list.c gnl/get_next_line.c algorithm.c
 
 INCL = ./gnl/libft/libft.a
 
