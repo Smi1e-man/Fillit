@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   block.c                                            :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
+/*   By: yyakoven <yyakoven@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 14:10:49 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/25 15:03:39 by seshevch         ###   ########.fr       */
+/*   Created: 2018/10/31 11:23:26 by yyakoven          #+#    #+#             */
+/*   Updated: 2018/10/31 12:16:32 by yyakoven         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		add_to_block(t_ttrmn *elem, char *line, int linenum)
+size_t		ft_strspn(const char *s, const char *charset)
 {
-	int		i;
+	size_t	i;
 
 	i = 0;
-	while (line[i])
+	if (s && charset)
 	{
-		if (line[i] == '#')
+		while (s[i])
 		{
-			if (elem->h < 4)
+			if (!(ft_chrstr(s[i], charset)))
 			{
-				elem->xy[elem->h][0] = linenum;
-				elem->xy[elem->h][1] = i;
+				return (i);
 			}
-			elem->h++;
+			i++;
 		}
-		else if (line[i] == '.')
-			elem->dots++;
-		i++;
 	}
 	return (i);
 }

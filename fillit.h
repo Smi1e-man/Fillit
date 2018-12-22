@@ -6,18 +6,15 @@
 /*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 13:45:12 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/25 15:07:19 by seshevch         ###   ########.fr       */
+/*   Updated: 2018/11/29 15:28:48 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __FILLIT_H
 # define __FILLIT_H
 
-# define LETTER 'A'
-# include "gnl/get_next_line.h"
-# include "gnl/libft/includes/libft.h"
+# include "libft.h"
 # include <fcntl.h>
-# include <stdio.h>
 
 typedef struct		s_ttrmn
 {
@@ -25,13 +22,34 @@ typedef struct		s_ttrmn
 	char			letter;
 	int				dots;
 	int				h;
+	int				i1;
+	int				k1;
 	struct s_ttrmn	*next;
 }					t_ttrmn;
 
-void				add_elem(t_ttrmn **last, char letter);
+int					g_d;
+int					g_t;
+/*
+** list.c
+*/
 t_ttrmn				*find_elem(t_ttrmn **lst, char letter);
-int					add_to_block(t_ttrmn *elem, char *line, int linenum);
+t_ttrmn				*add_elem(t_ttrmn **last, char letter);
 void				lst_del(t_ttrmn **lst);
-int     			ft_super_alpha(char **str, int i, int k, t_ttrmn *lst);
+int					add_to_block(t_ttrmn *elem, char *line, int linenum);
+/*
+** validate.c
+*/
+char				validate_file(t_ttrmn **lst, int fd, char letter,
+					int counter);
+int					error(t_ttrmn **lst, int code);
+int					validate_ttrmn(int y1, int y2, int x1, int x2);
+int					validate_block(t_ttrmn *node);
+int					ft_dimensions(char letter);
+/*
+** algorithm.c
+*/
+int					ft_alpha(char **str, int i, int k, t_ttrmn *el);
+int					ft_super_alpha(char **str, int i, int k, t_ttrmn *lst);
+void				ft_erase(t_ttrmn *lst, char **str);
 
 #endif

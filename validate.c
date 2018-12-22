@@ -1,22 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seshevch <seshevch@student.unit.ua>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 12:33:46 by yyakoven          #+#    #+#             */
-/*   Updated: 2018/11/25 15:11:17 by seshevch         ###   ########.fr       */
+/*   Created: 2018/11/27 18:54:58 by seshevch          #+#    #+#             */
+/*   Updated: 2018/11/28 16:49:11 by seshevch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			error(t_ttrmn **lst)
+int			error(t_ttrmn **lst, int code)
 {
-	write(2, "error\n", 6);
-	lst_del(lst);
+	char	*message;
+
+	if (code == 1)
+	{
+		message = "error";
+		lst_del(lst);
+	}
+	else
+	{
+		message = "usage: ./fillit source_file";
+	}
+	ft_putendl(message);
 	exit(1);
+}
+
+int			ft_dimensions(char letter)
+{
+	int		i;
+
+	i = 0;
+	while (i * i < (letter - 'A' + 1) * 4)
+	{
+		i++;
+	}
+	return (i);
 }
 
 int			validate_ttrmn(int y1, int y2, int x1, int x2)
@@ -57,72 +79,31 @@ int			validate_block(t_ttrmn *node)
 	return (total <= 8 && total >= 6);
 }
 
-t_ttrmn		*validate_file(t_ttrmn **lst, t_ttrmn *elem, int fd)
+char		validate_file(t_ttrmn **lst, int fd, char letter, int counter)
 {
-	char				letter;
-	int					counter;
 	char				*line;
+	t_ttrmn				*elem;
 
-	counter = 0;
-	letter = 'A';
 	line = NULL;
+	elem = *lst;
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (counter >= 0 && counter <= 3)
 		{
-			add_to_block(elem, line, counter) != 4 ? error(lst) : 0;
+			counter == 0 && *line == '\0' ? error(lst, 1) : 0;
+			add_to_block(elem, line, counter) != 4 ? error(lst, 1) : 0;
 			counter++;
 		}
 		else
 		{
-			(validate_block(elem) == 0) ? error(lst) : 0;
+			(validate_block(elem) == 0) ? error(lst, 1) : 0;
 			counter = 0;
 			letter++;
-			elem = find_elem(lst, letter);
+			letter > 'Z' ? error(lst, 1) : 0;
+			elem = add_elem(lst, letter);
 		}
 		free(line);
 	}
-	return (elem);
-}
-
-int			main(void)
-{
-	int					fd;
-	t_ttrmn				*lst;
-	t_ttrmn				*elem;
-	char				**str;
-	int					i;
-
-	lst = NULL;
-	str = (char **)malloc(sizeof(char *) * 5);
-	str[4] = NULL;
-	i = 0;
-	elem = find_elem(&lst, LETTER);
-	fd = open("ttrmn", O_RDONLY);
-	if (fd == -1)
-	{
-		error(NULL);
-	}
-	elem = validate_file(&lst, elem, fd);
-	(validate_block(elem) == 0) ? error(&lst) : 0;
-	while (i < 4)
-    {
-        str[i] = ft_memset(ft_strnew(4), '.', 4);
-        //printf("%s\n", str[i]);
-        i++;
-    }
-    i = 0;
-    //write(1, "*\n", 2);
-    //str[0][0] = '#';
-    //str[0][2] = '#';
-    //printf("%d\n", ft_super_alpha(str, 0, 0, lst));
-	ft_super_alpha(str, 0, 0, lst);
-    while (i < 4)
-    {
-        printf("%s\n", str[i]);
-        i++;
-    }
-	close(fd);
-	lst_del(&lst);
-	return (0);
+	(validate_block(elem) == 0) ? error(lst, 1) : 0;
+	return (elem->letter);
 }
